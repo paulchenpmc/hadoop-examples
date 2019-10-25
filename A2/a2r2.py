@@ -66,6 +66,7 @@ for line in sys.stdin:
             prev_parent = parent
     last_emitted_black = False
     prevsource = source
+    # sys.stderr.write("reporter:counter: CUSTOM, graphTraversed,1") # Increments 'graphTraversed' in counters group 'CUSTOM' by 1
 # Remember to emit last group here
 if not last_emitted_black:
     emit(prevsource, prev_adjlist, prev_sourceDist, prev_color, prev_parent)
