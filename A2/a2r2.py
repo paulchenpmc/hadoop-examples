@@ -35,39 +35,38 @@ for line in sys.stdin:
         sourceDist = int(sourceDist)
 
     # Reducer logic
-    # figure out the distance of each node from the source and the shortest path from each node to the source.
-    if color == 'BLACK':
-        emit(source, adjlist, sourceDist, color, parent)
-        prev_adjlist = None
-        prev_sourceDist = MAXVAL
-        prev_color = None
-        prev_parent = 'null'
-        prevsource = source
-        last_emitted_black = True
-        continue
-    if prevsource == source and last_emitted_black:
-        # Case where black was emitted, ignore all other records
-        continue
-    if prevsource != source and not last_emitted_black:
+    # Goal: Figure out the distance of each node from the source.
+
+    # Emit last key group on new key
+    if (prevsource is not None) and (prevsource != source):
         emit(prevsource, prev_adjlist, prev_sourceDist, prev_color, prev_parent)
         prev_adjlist = None
         prev_sourceDist = MAXVAL
         prev_color = None
         prev_parent = 'null'
-    if adjlist:
+
+    # Combine/aggregate node information
+    if color == 'BLACK':
         prev_adjlist = adjlist
-    if not prev_color:
-        prev_color = color
-    if prev_color == 'WHITE':
-        prev_color = color # Causes precedence of GRAY over WHITE
-    if sourceDist < prev_sourceDist:
         prev_sourceDist = sourceDist
-        if parent is not 'null':
+        prev_color = color
+        prev_parent = parent
+        prevsource = source
+    if prev_color != 'BLACK':
+        if color == 'GRAY' and sourceDist < MAXVAL:
+            prev_color = color
             prev_parent = parent
-    last_emitted_black = False
+            prev_sourceDist = sourceDist
+        elif color == 'WHITE':
+            prev_adjlist = adjlist
+            if prev_color != 'GRAY':
+                prev_color = color
+
     prevsource = source
+
+    # Counter to determine when to stop MapReduce loop
     # if color == 'GRAY':
     #     sys.stderr.write("reporter:counter:CUSTOM,GRAY,1\n") # Increments 'GRAY' in counters group 'CUSTOM' by 1
-# Remember to emit last group here
-if not last_emitted_black and (prevsource == source):
-    emit(prevsource, prev_adjlist, prev_sourceDist, prev_color, prev_parent)
+
+# Emit last record group
+emit(prevsource, prev_adjlist, prev_sourceDist, prev_color, prev_parent)
