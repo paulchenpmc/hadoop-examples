@@ -15,7 +15,8 @@ for kvp in sys.stdin:
         N = sum(keydict.values())
         for key in keydict:
             probability = keydict[key] / float(N)
-            print('{}\t{}'.format(key, probability))
+            pair_output = '{},{}'.format(key.split(',')[1], key.split(',')[0]) # Flip key order for output
+            print('{}\t{}'.format(pair_output, probability))
         keydict.clear()
     keydict[pair] += 1
     prevk = key1
@@ -24,5 +25,6 @@ for kvp in sys.stdin:
 N = sum(keydict.values())
 for key in keydict:
     probability = keydict[key] / float(N)
-    print('{}\t{}'.format(key, probability))
+    pair_output = '{},{}'.format(key.split(',')[1], key.split(',')[0]) # Flip key order for output
+    print('{}\t{}'.format(pair_output, probability))
 keydict.clear()
