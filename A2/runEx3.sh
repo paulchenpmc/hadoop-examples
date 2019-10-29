@@ -6,7 +6,9 @@ hdfs dfs -rm -r hdfs://10.1.2.89:9000/output3/
 
 $HADOOP_HOME/bin/hadoop jar $HADOOP_HOME/hadoop-streaming-2.7.6.jar \
     -jobconf mapred.reduce.tasks=2 \
-    -jobconf stream.num.map.output.key.fields=1 \
+    -jobconf stream.num.map.output.key.fields=2 \
+    -jobconf num.key.fields.for.partition=1 \
+    -partitioner org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner \
     -input /user/retail.dat \
     -output /output3/ \
     -file a2m3.py \

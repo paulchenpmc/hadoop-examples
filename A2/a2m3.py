@@ -14,5 +14,5 @@ for line in sys.stdin:
     all_pairs = list(itertools.permutations(items, 2))
     # Emit
     for pair in all_pairs:
-        key = '{},{}'.format(pair[0], pair[1])
-        print('{}\t{}'.format(key, 1)
+        key = '{}\t{}'.format(pair[0], pair[1])
+        print('{}\t{}'.format(key, 1))
