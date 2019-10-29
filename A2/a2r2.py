@@ -65,8 +65,8 @@ for line in sys.stdin:
     prevsource = source
 
     # Counter to determine when to stop MapReduce loop
-    # if color == 'GRAY':
-    #     sys.stderr.write("reporter:counter:CUSTOM,GRAY,1\n") # Increments 'GRAY' in counters group 'CUSTOM' by 1
+    if color == 'GRAY':
+        sys.stderr.write("reporter:counter:GRAY-NODE-COUNTER,GRAY,1\n") # Increments 'GRAY' in counters group 'CUSTOM' by 1
 
 # Emit last record group
 emit(prevsource, prev_adjlist, prev_sourceDist, prev_color, prev_parent)
