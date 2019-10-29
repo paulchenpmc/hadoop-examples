@@ -2,6 +2,7 @@
 #mapper.py
 
 import sys
+import itertools
 
 for line in sys.stdin:
     # Parse input
@@ -10,6 +11,8 @@ for line in sys.stdin:
         continue
     items = [int(i) for i in line.split()]
     # Mapper logic
-
+    all_pairs = list(itertools.permutations(items, 2))
     # Emit
-    print('{}\t{}'.format(1, 1))
+    for pair in all_pairs:
+        key = '{},{}'.format(pair[0], pair[1])
+        print('{}\t{}'.format(key, 1)
