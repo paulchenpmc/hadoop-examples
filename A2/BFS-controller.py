@@ -2,8 +2,8 @@ import subprocess
 
 numloops = 0
 DFS_FILEPATH        = 'output2-{}'
-MAPPER              = 'a2m2.py'
-REDUCER             = 'a2r2.py'
+MAPPER              = 'BFS-mapper.py'
+REDUCER             = 'BFS-reducer.py'
 INPUT_FILE          = 'user/a2ex2-input.txt'
 
 DFS_RM_CMD          = 'hdfs dfs -rm -r hdfs://10.1.2.89:9000/{}/'

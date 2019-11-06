@@ -9,9 +9,9 @@ $HADOOP_HOME/bin/hadoop jar $HADOOP_HOME/hadoop-streaming-2.7.6.jar \
     -jobconf stream.num.map.output.key.fields=2 \
     -input /user/matrix.txt \
     -output /output1/ \
-    -file a2m1.py \
-    -file a2r1.py \
-    -mapper a2m1.py \
-    -reducer a2r1.py
+    -file matrixTranspose-mapper.py \
+    -file matrixTranspose-reducer.py \
+    -mapper matrixTranspose-mapper.py \
+    -reducer matrixTranspose-reducer.py
 
 hadoop fs -getmerge /output1/ result.txt && vim result.txt

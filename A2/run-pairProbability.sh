@@ -11,9 +11,9 @@ $HADOOP_HOME/bin/hadoop jar $HADOOP_HOME/hadoop-streaming-2.7.6.jar \
     -partitioner org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner \
     -input /user/retail.dat \
     -output /output3/ \
-    -file a2m3.py \
-    -file a2r3.py \
-    -mapper a2m3.py \
-    -reducer a2r3.py
+    -file pairProbability-mapper.py \
+    -file pairProbability-reducer.py \
+    -mapper pairProbability-mapper.py \
+    -reducer pairProbability-reducer.py
 
 hadoop fs -getmerge /output3/ result.txt && vim result.txt

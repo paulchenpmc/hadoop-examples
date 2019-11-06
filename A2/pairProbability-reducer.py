@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 #reducer.py
 
+# Calculates Normalized Word Co-occurence Matrix
+
 import sys
 prevk1      = None
 prevk2      = '-' # '-' comes before all alphanumeric chars in the ascii table

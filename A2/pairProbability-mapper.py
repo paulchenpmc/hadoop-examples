@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 #mapper.py
 
+# Calculates Normalized Word Co-occurence Matrix
+
 import sys
 import itertools
 
